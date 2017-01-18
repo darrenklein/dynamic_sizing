@@ -23,8 +23,8 @@ for(var i = 0; i < squareHTMLCollection.length; i++){
 		return windowHeight * (elementHeight / 100);
 	};
 
-	Square.prototype.convertScalingUnits = function(windowHeight, elementHeightPixels){
-		var newScalingValue = ((elementHeightPixels / windowHeight) * 100);
+	Square.prototype.convertScalingUnits = function(windowWidth, elementHeightPixels){
+		var newScalingValue = ((elementHeightPixels / windowWidth) * 100);
 		this.newScalingUnit = "vw";
 		this.element.style.width = newScalingValue + this.newScalingUnit;
 		this.element.style.height = newScalingValue + this.newScalingUnit;
@@ -40,69 +40,7 @@ window.onresize = function(){
 	if(initialWindowWidth !== newWindowWidth){
 		for(var i = 0; i < squareObjectCollection.length; i++){
 			var initialElementHeightPixels = squareObjectCollection[i].calculatePixels(newWindowHeight, squareObjectCollection[i].height);
-			squareObjectCollection[i].convertScalingUnits(initialWindowHeight, initialElementHeightPixels);
+			squareObjectCollection[i].convertScalingUnits(initialWindowWidth, initialElementHeightPixels);
 		};
 	};
 };
-
-
-
-
-
-
-
-
-
-
-
-// square.style.width = elementWidth + scalingUnit;
-// square.style.height = elementHeight + scalingUnit;
-
-
-
-
-
-
-
-
-
-
-
-
-// var initialWindowWidth = window.innerWidth;
-// var initialWindowHeight = window.innerHeight;
-
-
-
-
-
-
-
-
-// window.onresize = function(){
-// 	var newWindowWidth = window.innerWidth;
-// 	var newWindowHeight = window.innerHeight;
-
-// 	if(initialWindowHeight !== newWindowHeight){
-
-// 		var calculateInitialPixels = function(newWindowWidth, elementWidth){
-// 			return newWindowWidth * (elementWidth / 100);
-// 		};
-
-// 		var convertScalingUnits = function(initialElementWidthPixels, initialWindowHeight){
-// 			var newScalingValue = ((initialElementWidthPixels / initialWindowHeight) * 100);
-// 			var newScalingUnit = "vh";
-// 			square.style.width = newScalingValue + newScalingUnit;
-// 			square.style.height = newScalingValue + newScalingUnit;
-// 		}
-
-// 		var initialElementWidthPixels = calculateInitialPixels(newWindowWidth, elementWidth);
-// 		var convertedScalingUnits = convertScalingUnits(initialElementWidthPixels, initialWindowHeight);
-
-// 	}
-// 	else{
-// 		square.style.width = elementWidth + scalingUnit;
-// 		square.style.height = elementHeight + scalingUnit
-// 	}
-
-// };
