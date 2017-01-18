@@ -26,10 +26,10 @@ for(var i = 0; i < squareHTMLCollection.length; i++){
 		};
 	};
 
-	Square.prototype.convertScalingUnits = function(windowWidth, elementPixels){
+	Square.prototype.convertScalingUnits = function(windowWidth, elementPixels, newScalingUnit){
 		var newWidth = ((elementPixels.widthPixels / windowWidth) * 100);
 		var newHeight = ((elementPixels.heightPixels / windowWidth) * 100);
-		this.newScalingUnit = "vw";
+		this.newScalingUnit = newScalingUnit;
 		this.element.style.width = newWidth + this.newScalingUnit;
 		this.element.style.height = newHeight + this.newScalingUnit;
 	};
@@ -41,10 +41,11 @@ window.onresize = function(){
 	var newWindowWidth = window.innerWidth;
 	var newWindowHeight = window.innerHeight;
 
-	if(initialWindowWidth !== newWindowWidth){
+	if(newWindowWidth <= initialWindowWidth){
+		var newScalingUnit = "vw";
 		for(var i = 0; i < squareObjectCollection.length; i++){
 			var initialElementPixels = squareObjectCollection[i].calculatePixels(newWindowHeight, squareObjectCollection[i].height, squareObjectCollection[i].width);
-			squareObjectCollection[i].convertScalingUnits(initialWindowWidth, initialElementPixels);
+			squareObjectCollection[i].convertScalingUnits(initialWindowWidth, initialElementPixels, newScalingUnit);
 		};
-	};
+	}
 };
