@@ -1,3 +1,4 @@
-#red_square{
+.red_square{
 	background-color: red;
+	margin: 5px;
 }
