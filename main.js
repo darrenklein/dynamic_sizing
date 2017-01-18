@@ -38,4 +38,25 @@ window.onresize = function(){
 
 	}
 
+
+	if(initialWindowWidth !== newWindowWidth){
+
+		var calculateInitialPixels = function(initialWindowWidth, elementWidth){
+			return initialWindowWidth * (elementWidth / 100);
+		};
+
+		var convertScalingUnits = function(initialElementWidthPixels, initialWindowHeight){
+			var newScalingValue = ((initialElementWidthPixels / initialWindowHeight) * 100);
+			var newScalingUnit = "vw";
+			square.style.width = newScalingValue + newScalingUnit;
+			square.style.height = newScalingValue + newScalingUnit;
+		}
+
+		var initialElementWidthPixels = calculateInitialPixels(initialWindowWidth, elementWidth);
+		var convertedScalingUnits = convertScalingUnits(initialElementWidthPixels, initialWindowHeight);
+
+	}
+
+
+
 };
