@@ -1,8 +1,5 @@
 var initialWindowWidth = window.innerWidth;
 var initialWindowHeight = window.innerHeight;
-var elementWidth = 40;
-var elementHeight = 20;
-var scalingUnit = "vh";
 var squareHTMLCollection = document.getElementsByClassName("red_square");
 var squareObjectCollection = [];
 
@@ -34,19 +31,47 @@ Square.prototype.convertScalingUnits = function(windowWidth, elementPixels, newS
 
 
 for(var i = 0; i < squareHTMLCollection.length; i++){
-	this['square' + i] = new Square(squareHTMLCollection[i], elementWidth, elementHeight, scalingUnit);
-	squareObjectCollection.push(this['square' + i]);
-};
+	if(initialWindowWidth >= initialWindowHeight){
+		console.log("scaling by height!")
+		var elementWidth = 40;
+		var elementHeight = 20;
+		var scalingUnit = "vh";
+		this['square' + i] = new Square(squareHTMLCollection[i], elementWidth, elementHeight, scalingUnit);
+		squareObjectCollection.push(this['square' + i]);
 
-window.onresize = function(){
-	var newWindowWidth = window.innerWidth;
-	var newWindowHeight = window.innerHeight;
+		window.onresize = function(){
+			var newWindowWidth = window.innerWidth;
+			var newWindowHeight = window.innerHeight;
 
-	if(newWindowWidth !== initialWindowWidth){
-		var newScalingUnit = "vw";
-		for(var i = 0; i < squareObjectCollection.length; i++){
-			var initialElementPixels = squareObjectCollection[i].calculatePixels(newWindowHeight, squareObjectCollection[i].height, squareObjectCollection[i].width);
-			squareObjectCollection[i].convertScalingUnits(initialWindowWidth, initialElementPixels, newScalingUnit);
+			if(newWindowWidth !== initialWindowWidth){
+				var newScalingUnit = "vw";
+				for(var i = 0; i < squareObjectCollection.length; i++){
+					var initialElementPixels = squareObjectCollection[i].calculatePixels(newWindowHeight, squareObjectCollection[i].height, squareObjectCollection[i].width);
+					squareObjectCollection[i].convertScalingUnits(initialWindowWidth, initialElementPixels, newScalingUnit);
+				};
+			}
+		};
+	}
+	else{
+		console.log("scaling by width!")
+		var elementWidth = 19.861111;
+		var elementHeight = 9.930556;
+		var scalingUnit = "vw";
+		this['square' + i] = new Square(squareHTMLCollection[i], elementWidth, elementHeight, scalingUnit);
+		squareObjectCollection.push(this['square' + i]);
+
+		window.onresize = function(){
+			var newWindowWidth = window.innerWidth;
+			var newWindowHeight = window.innerHeight;
+
+			if(newWindowHeight !== initialWindowHeight){
+				var newScalingUnit = "vh";
+				for(var i = 0; i < squareObjectCollection.length; i++){
+					var initialElementPixels = squareObjectCollection[i].calculatePixels(newWindowWidth, squareObjectCollection[i].height, squareObjectCollection[i].width);
+					squareObjectCollection[i].convertScalingUnits(initialWindowHeight, initialElementPixels, newScalingUnit);
+				};
+			}
 		};
 	}
 };
+
