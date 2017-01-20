@@ -32,7 +32,6 @@ Square.prototype.convertScalingUnits = function(windowWidth, elementPixels, newS
 
 for(var i = 0; i < squareHTMLCollection.length; i++){
 	if(initialWindowWidth >= initialWindowHeight){
-		console.log("scaling by height!")
 		var elementWidth = 40;
 		var elementHeight = 20;
 		var scalingUnit = "vh";
@@ -43,7 +42,7 @@ for(var i = 0; i < squareHTMLCollection.length; i++){
 			var newWindowWidth = window.innerWidth;
 			var newWindowHeight = window.innerHeight;
 
-			if(newWindowWidth !== initialWindowWidth){
+			if(newWindowWidth <= initialWindowWidth || newWindowWidth > initialWindowWidth){
 				var newScalingUnit = "vw";
 				for(var i = 0; i < squareObjectCollection.length; i++){
 					var initialElementPixels = squareObjectCollection[i].calculatePixels(newWindowHeight, squareObjectCollection[i].height, squareObjectCollection[i].width);
@@ -53,7 +52,6 @@ for(var i = 0; i < squareHTMLCollection.length; i++){
 		};
 	}
 	else{
-		console.log("scaling by width!")
 		var elementWidth = 19.861111;
 		var elementHeight = 9.930556;
 		var scalingUnit = "vw";
@@ -64,7 +62,7 @@ for(var i = 0; i < squareHTMLCollection.length; i++){
 			var newWindowWidth = window.innerWidth;
 			var newWindowHeight = window.innerHeight;
 
-			if(newWindowHeight !== initialWindowHeight){
+			if(newWindowHeight <= initialWindowHeight || newWindowHeight > initialWindowHeight){
 				var newScalingUnit = "vh";
 				for(var i = 0; i < squareObjectCollection.length; i++){
 					var initialElementPixels = squareObjectCollection[i].calculatePixels(newWindowWidth, squareObjectCollection[i].height, squareObjectCollection[i].width);
